@@ -1,0 +1,11 @@
+.env
+docker run --name my-postgres -p 5432:5432 -e POSTGRES_USER=todouser -e POSTGRES_PASSWORD=Awesome@2022 --network my-django-postgres-network -d postgres
+
+CREATE DATABASE django_todo OWNER todouser;
+
+docker run --env-file .env --name django-todo-app-c1 -p 8000:8000 --network my-django-postgres-network -d django-todo-app
+
+docker tag django-todo-app munguriek/vlad
+docker push munguriek/vlad
+
+
